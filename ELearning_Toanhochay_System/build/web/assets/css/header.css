@@ -1,0 +1,419 @@
+/* assets/css/header.css */
+:root {
+    --primary-color: #0066cc; /* Main blue */
+    --primary-dark: #004d99;  /* Darker blue for hover */
+    --light-blue-bg: #e6f0ff; /* Light background for hover */
+    --text-dark: #333333;
+    --text-light: #666666;
+    --border-color: #dddddd;
+    --white-color: #ffffff;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --header-height: 80px; /* Adjust as needed */
+    --header-top-height: 40px; /* Adjust as needed */
+    --font-main: 'Poppins', sans-serif; /* Defined font */
+}
+
+body {
+    padding-top: calc(var(--header-height) + var(--header-top-height)); /* Space for fixed header */
+    font-family: var(--font-main); /* Apply Poppins font to body */
+}
+
+.header {
+    background-color: var(--white-color);
+    box-shadow: var(--shadow-medium);
+    position: fixed; /* Changed to fixed for better stickiness */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header_wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Logo size adjusts, content takes rest */
+    gap: 30px;
+    align-items: center; /* Align items vertically */
+}
+
+/* --- Column 1: Logo --- */
+.logo-column {
+    padding: 10px 0; /* Vertical padding for logo */
+}
+
+.logo img {
+    height: 150px; /* Giữ nguyên logo to */
+    width: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
+/* --- Column 2: Content --- */
+.content-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Remove gap, handle spacing with padding */
+}
+
+/* --- Row 1: Top Bar --- */
+.header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: var(--header-top-height);
+    margin-top: 40px;
+
+    /* <<<< NOTE: XÓA HOẶC COMMENT LẠI DÒNG NÀY ĐỂ BỎ ĐƯỜNG KẺ */
+    /* border-bottom: 1px solid var(--border-color); */
+
+    padding: 5px 0;
+}
+
+/* --- SỬA THANH SEARCH --- */
+.header-search {
+    flex-grow: 1; /* <<<< NOTE: Cho phép search bar co giãn */
+    max-width: 600px; /* <<<< NOTE: TĂNG max-width để thanh search dài ra (ban đầu 350px) */
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 25px; /* <<<< NOTE: Tăng lại bo tròn nếu muốn */
+    overflow: hidden;
+    background-color: var(--white-color);
+    transition: all 0.3s ease;
+    /* margin-left: auto; */ /* Bỏ đi */
+    /* margin-right: 20px; */ /* Bỏ đi */
+}
+.header-search:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+}
+.search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px 18px; /* <<<< NOTE: Tăng lại padding nếu muốn ô search cao hơn */
+    font-size: 20px;
+    font-family: var(--font-main);
+    color: var(--text-dark);
+}
+.search-input::placeholder {
+    color: var(--text-light);
+}
+.btn-search {
+    background-color: #ffffff;
+    color: #0933f6;
+    border: none;
+    padding: 10px 25px; /* <<<< NOTE: Tăng lại padding nút */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 20px; 
+}
+.btn-search:hover {
+    background-color: var(--primary-dark);
+}
+/* --- KẾT THÚC SỬA THANH SEARCH --- */
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    /* margin-left: 20px; */ /* Bỏ margin-left */
+}
+/* ... (Style nút giữ nguyên) ... */
+.header-actions .btn {
+    font-size: 20px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: 150px;
+    border-color: var(--primary-color);
+}
+.btn-register {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-register:hover {
+    background-color: var(--light-blue-bg);
+}
+.btn-login {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+}
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--white-color);
+}
+.welcome-message {
+    color: var(--text-dark);
+    font-size: 14px;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+/* --- Row 2: Navigation --- */
+.navbar {
+    display: flex;
+    justify-content: flex-start; /* <<<< NOTE: ĐỔI thành flex-start để căn trái */
+    gap: 100px; /* <<<< NOTE: TĂNG GAP để các mục menu cách xa nhau hơn (ban đầu 30px) */
+    height: var(--header-height);
+    align-items: center;
+    width: 100%; /* Đảm bảo navbar chiếm hết chiều rộng cột */
+    margin: 30px 0 0 30px;
+}
+
+/* ... (Style .nav-item, dropdown, submenu giữ nguyên) ... */
+.nav-item {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 5px 0;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.nav-item i {
+    font-size: 1.1em;
+}
+.nav-item:hover, .nav-item.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+.dropdown {
+    position: relative;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    min-width: 200px;
+    z-index: 1001;
+    margin-top: 5px;
+    padding: 5px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform-origin: top center;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: var(--text-dark);
+    font-size: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.dropdown-item:hover {
+    background-color: var(--light-blue-bg);
+    color: var(--primary-color);
+}
+.dropdown-item.has-submenu::after {
+    content: '\f054';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+.submenu {
+    display: none;
+    position: absolute;
+    top: -6px;
+    left: 100%;
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    min-width: 200px;
+    margin-left: 5px;
+    padding: 5px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.dropdown-item:hover .submenu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+.submenu-item {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.submenu-item:hover {
+    background-color: var(--light-blue-bg);
+    color: var(--primary-color);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .header_wrapper {
+        padding: 0 15px;
+    }
+    .header-container {
+        gap: 20px;
+    }
+    .logo img {
+        height: 150px;
+    }
+    .navbar { /* gap: 20px; */ /* Bỏ gap */
+    }
+    .nav-item {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-container {
+        grid-template-columns: 1fr;
+    }
+    .logo-column {
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+    }
+    .logo img {
+        height: 120px;
+    }
+    .content-column {
+        gap: 10px;
+    }
+    .header-top-row {
+        height: auto;
+        padding: 10px 0;
+    }
+    .navbar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        width: 100%;
+        gap: 25px; /* <<<< NOTE: Trả lại gap ở đây cho mobile */
+    }
+    .nav-item {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: calc(var(--header-height) + 100px);
+    }
+    .header-top-row {
+        flex-direction: column;
+        align-items: stretch;
+        height: auto;
+        gap: 10px;
+    }
+    .header-search {
+        max-width: none;
+        margin-right: 0; /* <<<< NOTE: Bỏ margin-right trên mobile */
+    }
+    .header-actions {
+        justify-content: center;
+        margin-left: 0; /* Bỏ margin-left */
+    }
+    .navbar {
+        justify-content: flex-start; /* Giữ flex-start cho màn hình nhỏ cuộn ngang */
+        overflow-x: auto;
+        padding-bottom: 10px;
+        width: 100%;
+        gap: 50px; /* <<<< NOTE: Có thể chỉnh gap nhỏ hơn ở đây cho màn hình tablet/mobile */
+    }
+    .nav-item {
+        flex-shrink: 0;
+    }
+    .dropdown-menu, .submenu {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        transform: none;
+        margin-top: 0;
+        max-height: 70vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .submenu {
+        left: 10px;
+        margin-left: 0;
+        top: auto;
+        bottom: 100%;
+        margin-bottom: 5px;
+    }
+    .dropdown:hover .dropdown-menu {
+        display: none;
+    }
+    .dropdown-item:hover .submenu {
+        display: none;
+    }
+}
+
+/* ===== SỬA MÀU DOTS TRONG FILE style.css (hoặc file chứa style carousel) ===== */
+/* Bạn cần tìm đến phần style cho carousel dots trong file style.css hoặc file tương tự */
+
+.carousel-dots {
+    /* ... các style cũ ... */
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 102, 204, 0.3); /* <<<< NOTE: Đổi màu nền mặc định sang xanh dương mờ */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 102, 204, 0.5); /* <<<< NOTE: Đổi màu viền sang xanh dương mờ */
+}
+.dot:hover {
+    background-color: rgba(0, 102, 204, 0.6); /* <<<< NOTE: Đổi màu hover sang xanh dương đậm hơn */
+}
+.dot.active {
+    background-color: var(--primary-color); /* <<<< NOTE: Đổi màu active sang màu xanh dương chính */
+    border-color: var(--primary-dark); /* <<<< NOTE: Viền xanh đậm khi active */
+    transform: scale(1.1);
+}
