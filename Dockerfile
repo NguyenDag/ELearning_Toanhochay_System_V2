@@ -1,5 +1,7 @@
+# ÉP XÓA CACHE – THÊM DÒNG NÀY VÀO ĐẦU FILE
+ARG CACHEBUST=$(date +%s)
 # Giai đoạn 1: Build JAR với Maven
-FROM maven:3.9.9-eclipse-temurin-11 AS builder
+FROM maven:3.9.11-eclipse-temurin-11 AS builder
 WORKDIR /app
 COPY . .
 RUN mvn -DskipTests clean package
