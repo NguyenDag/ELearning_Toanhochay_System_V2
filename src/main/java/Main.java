@@ -1,8 +1,4 @@
 import org.apache.catalina.startup.Tomcat;
-import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.webresources.DirResourceSet;
-import org.apache.catalina.webresources.StandardRoot;
-
 import java.io.File;
 
 public class Main {
@@ -11,24 +7,18 @@ public class Main {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(Integer.parseInt(port));
 
-        // Đường dẫn đến thư mục webapp
-        String webappDir = new File("src/main/webapp").getAbsolutePath();
-        StandardContext ctx = (StandardContext) tomcat.addWebapp("", webappDir);
+        // Tìm webapp trong JAR
+        String jarFile = Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String webappDir = new File(jarFile).getParent();
 
-        // Thêm classes (nếu có Servlet)
-        File classesDir = new File("target/classes");
-        if (classesDir.exists()) {
-            StandardRoot resources = new StandardRoot(ctx);
-            resources.addPreResources(new DirResourceSet(
-                resources, "/WEB-INF/classes",
-                classesDir.getAbsolutePath(), "/"
-            ));
-            ctx.setResources(resources);
-        }
+        // Dùng thư mục tạm hoặc giữ nguyên
+        tomcat.addWebapp("", "src/main/webapp"); // Chỉ chạy local
 
-        tomcat.getConnector();
+        // Trên Render: Dùng /tmp
+        File tempWebapp = new File("/tmp/webapp");
+        // Copy từ JAR vào /tmp (cần logic)
+
         tomcat.start();
-        System.out.println("Server running at http://localhost:" + port);
         tomcat.getServer().await();
     }
 }
